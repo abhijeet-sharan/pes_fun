@@ -11,5 +11,5 @@
  <p>Program 1 & 2 require input for each execution run.<br>
  Program 1 reads input input as $Number $Radix $Operand<br>
  Program 2 reads input as $Integer. The input integer's ASCII value is categorised and printed.
- Program 3 checks for *only* three set bits in the last 4 bits of the input
+ Program 3 checks for only three set bits in the last 4 bits of the input
 </p>
