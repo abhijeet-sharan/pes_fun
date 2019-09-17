@@ -1,5 +1,5 @@
-PES Project 1 Readme
-# Names of team members
+# PES Project 1 Readme
+**Names of team members**
   -Sharan Arumugam
   -Abhijeet Dutt Srivastava
 **Repo contents**
