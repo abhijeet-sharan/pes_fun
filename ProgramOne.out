@@ -1,0 +1,106 @@
+
+Enter input as input number,radix,operand
+Input Value: -6    Radix: 10    Operand: 4
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b0110		0b1111		0b0
+Octal(abs)			06		017		0
+Decimal(abs)			6		15		0
+Hexadecimal(abs)		0x6		0xF		0x0
+Signed One's Complement		0b0101		0b1111		0b0000
+Signed Two's Complement		0b0110		0b1111		0b0000
+Signed Magnitude		0b1110		0b1111		0b0000
+
+Enter input as input number,radix,operand
+Input Value: -6    Radix: 9    Operand: 4
+Error-Radix invalid
+Enter valid radix
+
+Enter input as input number,radix,operand
+Input Value: -6    Radix: 10    Operand: 5
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b00110		0b11111		0b0
+Octal(abs)			06		037		0
+Decimal(abs)			6		31		0
+Hexadecimal(abs)		0x6		0x1F		0x0
+Signed One's Complement		0b00101		0b11111		0b00000
+Signed Two's Complement		0b00110		0b11111		0b00000
+Signed Magnitude		0b10110		0b11111		0b00000
+
+Enter input as input number,radix,operand
+Input Value: -9    Radix: 10    Operand: 4
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b1001		0b1111		0b0
+Octal(abs)			011		017		0
+Decimal(abs)			9		15		0
+Hexadecimal(abs)		0x9		0xF		0x0
+Signed One's Complement		Error can't be found due to operand limits
+Signed Two's Complement		0b1001		0b1111		0b0000
+Signed Magnitude		Error can't be found due to operand limits
+
+Enter input as input number,radix,operand
+Input Value: 237    Radix: 10    Operand: 8
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b11101101		0b11111111		0b0
+Octal(abs)			0355		0377		0
+Decimal(abs)			237		255		0
+Hexadecimal(abs)		0xED		0xFF		0x0
+Signed One's Complement		Error can't be found due to operand limits
+Signed Two's Complement		0b00010011		0b11111111		0b00000000
+Signed Magnitude		Error can't be found due to operand limits
+
+Enter input as input number,radix,operand
+Input Value: 0354    Radix: 8    Operand: 8
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b11101100		0b11111111		0b0
+Octal(abs)			0354		0377		0
+Decimal(abs)			236		255		0
+Hexadecimal(abs)		0xEC		0xFF		0x0
+Signed One's Complement		Error can't be found due to operand limits
+Signed Two's Complement		0b00010100		0b11111111		0b00000000
+Signed Magnitude		Error can't be found due to operand limits
+
+Enter input as input number,radix,operand
+Input Value: 0xEB    Radix: 16    Operand: 8
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b11101011		0b11111111		0b0
+Octal(abs)			0353		0377		0
+Decimal(abs)			235		255		0
+Hexadecimal(abs)		0xEB		0xFF		0x0
+Signed One's Complement		Error can't be found due to operand limits
+Signed Two's Complement		0b00010101		0b11111111		0b00000000
+Signed Magnitude		Error can't be found due to operand limits
+
+Enter input as input number,radix,operand
+Input Value: -125    Radix: 10    Operand: 8
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b01111101		0b11111111		0b0
+Octal(abs)			0175		0377		0
+Decimal(abs)			125		255		0
+Hexadecimal(abs)		0x7D		0xFF		0x0
+Signed One's Complement		0b01111100		0b11111111		0b00000000
+Signed Two's Complement		0b01111101		0b11111111		0b00000000
+Signed Magnitude		0b11111101		0b11111111		0b00000000
+
+Enter input as input number,radix,operand
+Input Value: 65400    Radix: 10    Operand: 16
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b1111111101111000		0b1111111111111111		0b0
+Octal(abs)			0177570		0177777		0
+Decimal(abs)			65400		65535		0
+Hexadecimal(abs)		0xFF78		0xFFFF		0x0
+Signed One's Complement		Error can't be found due to operand limits
+Signed Two's Complement		0b0000000010001000		0b1111111111111111		0b0000000000000000
+Signed Magnitude		Error can't be found due to operand limits
+
+Enter input as input number,radix,operand
+Input Value: -32701    Radix: 10    Operand: 16
+Output:				Value		Maximum		Minimum
+Binary(abs)			0b0111111110111101		0b1111111111111111		0b0
+Octal(abs)			077675		0177777		0
+Decimal(abs)			32701		65535		0
+Hexadecimal(abs)		0x7FBD		0xFFFF		0x0
+Signed One's Complement		0b0111111110111100		0b1111111111111111		0b0000000000000000
+Signed Two's Complement		0b0111111110111101		0b1111111111111111		0b0000000000000000
+Signed Magnitude		0b1111111110111101		0b1111111111111111		0b0000000000000000
+
+
