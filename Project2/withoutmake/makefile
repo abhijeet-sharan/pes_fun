@@ -58,6 +58,7 @@ OBJS := ./debug/test.o \
 	./debug/fsl_lpsci.o \
 	./debug/fsl_smc.o \
 	./debug/fsl_uart.o \
+	./debug/led.o \
 	./debug/fsl_debug_console.o
 	
 
@@ -76,7 +77,9 @@ C_DEPS = \
 	./debug/fsl_gpio.d \
 	./debug/fsl_lpsci.d \
 	./debug/fsl_smc.d \
-	./debug/fsl_uart.d ./debug/fsl_debug_console.d
+	./debug/fsl_uart.d \
+	./debug/led.d \ 
+	./debug/fsl_debug_console.d
  
 # Compiler options
 CC_OPTIONS := \
@@ -159,6 +162,7 @@ OBJS := ./debug/test.o \
 	./debug/fsl_lpsci.o \
 	./debug/fsl_smc.o \
 	./debug/fsl_uart.o \
+	./debug/led.o \
 	./debug/fsl_debug_console.o
 	
 # List of dependency files
@@ -176,7 +180,9 @@ C_DEPS = \
 	./debug/fsl_gpio.d \
 	./debug/fsl_lpsci.d \
 	./debug/fsl_smc.d \
-	./debug/fsl_uart.d ./debug/fsl_debug_console.d
+	./debug/fsl_uart.d \
+	./debug/led.d \
+	./debug/fsl_debug_console.d
  
 # Compiler options
 CC_OPTIONS := \
@@ -317,6 +323,15 @@ $(EXE): $(OBJS) $(USER_OBJS) $(LINKER)
 	@echo 'Finished building: $<'
 	@echo ' '
 	
+############################
+# Rule to build the files in the board folder
+./debug/led.o: ./board/led.c
+	@echo 'Building file: $<'
+#	$(CC) $(CC_OPTIONS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	$(CC) $(CC_OPTIONS) $(B_OPTIONS) $(INCLUDES) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
 ############################
 # Rule to build the files in the board folder
 ./debug/peripherals.o: ./board/peripherals.c
