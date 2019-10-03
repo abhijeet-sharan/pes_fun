@@ -226,7 +226,7 @@ endif
 
 ifeq ($(MODE), PC_RUN)
 CC:=gcc
-LL:= 
+LL:=gcc
 EXE:= ./test.exe
 OBJS:=./debug/test.o
 C_DEPS := ./test.d 
@@ -243,7 +243,7 @@ endif
 
 ifeq ($(MODE), PC_DEBUG)
 CC:=gcc
-LL:= 
+LL:=gcc 
 EXE:= ./test.exe
 OBJS:=./debug/test.o
 C_DEPS := ./test.d 
