@@ -92,7 +92,7 @@ while (1)
 #if defined PCR || defined PCD
     		time_t Timestamp; time(&Timestamp);
     		uint32_t timing[]={3000,1000,2000,600,1000,400,1000,200,500,100,500,100,500,100,1000,200,1000,400,2000,600};//contains timings
-    		uint32_t TimeCheck=clock();//stores clock time at start of routine
+    		uint32_t TimeCheck=clock();//stores clock time at start of routine-https://stackoverflow.com/questions/361363/how-to-measure-time-in-milliseconds-using-ansi-c/37920181#37920181
 
 		        LED_RUN(i);
 				LED_STATUS(i);
