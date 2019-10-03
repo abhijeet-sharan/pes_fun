@@ -127,7 +127,7 @@ while (1)
     	for(int i=0;i<20;i++)
     	{
 #if defined PCR || defined PCD
-    		//time_t Timestamp;
+    		time_t Timestamp;
     		uint32_t timing[]={3000,1000,2000,600,1000,400,1000,200,500,100,500,100,500,100,1000,200,1000,400,2000,600};uint32_t TimeCheck=clock();
 #endif
 
