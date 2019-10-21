@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1571679673 source:c:\users\shara\documents\courses\pes\project 3\pr3\mainer.c
+	<stdio.h>
+	<stdint.h>
+	"memory.h"
+
+1571679647 c:\users\shara\documents\courses\pes\project 3\pr3\memory.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1571646185 c:\users\shara\documents\courses\pes\project 3\pr3\memory.c
+	"memory.h"
+	"pattern_gen.h"
+
+1571623810 c:\users\shara\documents\courses\pes\project 3\pr3\pattern_gen.h
+	<stdlib.h>
+	<stdint.h>
+
+1571639574 source:c:\users\shara\documents\courses\pes\project 3\pr3\pattern_gen.c
+	"pattern_gen.h"
+
+1571646185 source:c:\users\shara\documents\courses\pes\project 3\pr3\memory.c
+	"memory.h"
+	"pattern_gen.h"
+
