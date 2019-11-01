@@ -40,6 +40,7 @@
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
 #include "TMP102.h"
+#include <stdint.h>
 
 /* TODO: insert other include files here. */
 
@@ -48,7 +49,7 @@
 /*
  * @brief   Application entry point.
  */
-//uint16_t Raw_Temp;
+uint16_t Raw_Temp;
 int main(void) {
 
   	/* Init board hardware. */
@@ -60,13 +61,17 @@ int main(void) {
 
     PRINTF("Hello World\n");
     I2C_Init();
-    //I2C_Transmit();
-    I2C_Read();
-    //I2C_Read();
+    I2C_Transmit(CONFIG_REG, CONFIG_BYTE1, CONFIG_BYTE2); // Configure Sensor
+    pause();
+    I2C_Transmit(TEMP_LOW_REG, TLOW_1, TLOW_2); // Set Temperature Low Register
+    pause();
+    Raw_Temp=I2C_Read();
+    PRINTF("\n\rReturned value = %d",Raw_Temp);
 
 
     while(1)
     {
+    //I2C_Read();
     //I2C_Init();
     //I2C_Transmit();
     //Raw_Temp =(uint16_t)I2C_Receive();
