@@ -84,51 +84,7 @@ uint32_t n = 100000;
 		I2C0->C1 &=~(I2C_C1_MST_MASK);					//Send stop bit
     	}
 
-
-
-  /* int I2C_Receive(void)
-    {
-    	uint8_t firstbyte = 0;
-    	uint8_t secondbyte = 0;
-    	uint16_t buffer = 0;
-    	//PAGE-10 TMP102 datasheet
-    	I2C0->C1 |= I2C_C1_TX_MASK;						// Transmit
-
-    	//Change pointer register to temperature register
-
-    	I2C0->D = ((SLAVE_ADDRESS << 1) | READ);		// Write 7-bit Slave Address + READ bit(should be low)
-    	I2C0->D = TEMP_REG;								// Temperature Register
-
-    	I2C0->C1 |= I2C_C1_MST_MASK;					//  Generate START SIGNAL
-       	I2C0->D = ((SLAVE_ADDRESS << 1) | WRITE);       // Slave address with 8th bit high
-    	// wait for slave ACK
-    	while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
-    	I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
-
-    	I2C0->C1 &= ~I2C_C1_TX_MASK;					// Set KL25Z in receiver mode    	firstbyte = I2C0->D;
-    	//For testing only
-    	buffer = firstbyte;
-    	printf("Inside receive %d",buffer);
-    	//Maybe do this
-    	//buffer = (8<<firstbyte);
-    	while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
-    	I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
-
-    	I2C0->C1 &= ~I2C_C1_TXAK_MASK;					// TXAK is reset to generate ACK
-
-    	secondbyte = I2C0->D;
-    	//Take secondbyte input into buffer
-    	// Maybe buffer |= secondbyte;
-    	while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
-    	I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
-
-    	I2C0->C1 &= ~I2C_C1_TXAK_MASK;					// TXAK is reset to generate ACK
-    	I2C0->C1 &= ~I2C_C1_MST_MASK;					//  Generate STOP SIGNAL
-    	return buffer;
-    }
-*/
-
-    int I2C_Read(void)
+    int I2C_Read(uint8_t read_reg)
    {
 	   uint8_t data[3];
 	   uint16_t buffer = 0;
@@ -140,7 +96,7 @@ uint32_t n = 100000;
 	   while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
 	   I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
 
-	   I2C0->D = TEMP_REG;							    // Temperature Register
+	   I2C0->D = read_reg;							    // Temperature Register
 	   while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
 	   I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
 
@@ -158,25 +114,46 @@ uint32_t n = 100000;
 		I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
 
 		data[0] = I2C0->D;
-		//buffer = I2C0->D;
-		buffer = data[0];
-		buffer = 1<<buffer;
 		while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
 		I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
 
 		data[1] = I2C0->D;
-		buffer |= data[1];
 		while((I2C0->S & I2C_S_IICIF_MASK)==0){} 		// Wait for interrupt (1 interrupt pending/0 Not pending)
 		I2C0->S |= I2C_S_IICIF_MASK; 					// cleared by writing 1 page 695 manual
 
 		I2C0->C1 |= I2C_C1_TXAK_MASK;						// NACK
 		I2C0->C1 &= ~I2C_C1_MST_MASK;					//MASTER STOP
 
-		PRINTF("\n\r%d",data[0]);
-		PRINTF("\n\r%d",data[1]);
+		buffer = ((data[0]<<8) + (data[1]));
+		PRINTF("\n\r%d   %d",read_reg,data[0]);
+		PRINTF("\n\r%d   %d",read_reg,data[1]);
 
 		return buffer;
    }
+
+    // Some function for ALERT Pin on PTC16 GPIO pin
+
+    int Alert_Init(void)
+   {
+	   volatile uint8_t input;
+	   //Set PIN PTC17 as GPIO Input
+	   //PORTC->PCR[17] &= ~(PORT_PCR_MUX_MASK);
+ 	   PORTC->PCR[17] |= PORT_PCR_MUX(1); // Set PTC17 as GPIO
+	   // SET PDDR to enable pin as Input
+	   PTC->PDDR &= ~(MASK(ALERT_PIN)); // Set Pin as General Input
+
+	   PORTC->PCR[17] |=PORT_PCR_PE(17);	// Internal Pullup/Pulldown is enabled
+	   PORTC->PCR[17] |=PORT_PCR_PS(17); // Internal Pullup Register
+
+	   input = PTC->PDIR;
+
+	   return input;
+	   //EnableIRQ(PORT_PCR_IRQC_MASK);
+   	   //Port Data Input Register is maybe the buffer which holds logic value
+   }
+
+
+
 
   /* void Enable_irq (int irq)
     {

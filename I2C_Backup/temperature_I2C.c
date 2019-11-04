@@ -50,6 +50,8 @@
  * @brief   Application entry point.
  */
 uint16_t Raw_Temp;
+volatile uint8_t Alert_State=0;
+
 int main(void) {
 
   	/* Init board hardware. */
@@ -63,23 +65,35 @@ int main(void) {
     I2C_Init();
     I2C_Transmit(CONFIG_REG, CONFIG_BYTE1, CONFIG_BYTE2); // Configure Sensor
     pause();
-    I2C_Transmit(TEMP_LOW_REG, TLOW_1, TLOW_2); // Set Temperature Low Register
+    //I2C_Transmit(TEMP_LOW_REG, TLOW_1, TLOW_2); // Set Temperature Low Register
+    I2C_Transmit(TEMP_HIGH_REG, THIGH_1, THIGH_2);
     pause();
-    Raw_Temp=I2C_Read();
-    PRINTF("\n\rReturned value = %d",Raw_Temp);
+    I2C_Transmit(TEMP_LOW_REG, TLOW_1, TLOW_2);
+    pause();
+    Raw_Temp=I2C_Read(CONFIG_REG);
+
+    pause();
+    Raw_Temp=I2C_Read(TEMP_HIGH_REG);
+
+    pause();
+    Raw_Temp=I2C_Read(TEMP_LOW_REG);
+
+    pause();
+    Raw_Temp=I2C_Read(TEMP_REG);
+
+
+//    Alert_State = Alert_Init();
+//    PRINTF("\n\rReturned value = %d",Raw_Temp);
+//    PRINTF("Alert_State = %d",Alert_State);
 
 
     while(1)
     {
-    //I2C_Read();
-    //I2C_Init();
-    //I2C_Transmit();
-    //Raw_Temp =(uint16_t)I2C_Receive();
-    //I2C_Read();
-    //delay(100000);
-    //I2C_Read(void);
-
-
+    	//pause();
+        //Raw_Temp=I2C_Read(TEMP_REG);
+       // Alert_State = Alert_Init();
+        //PRINTF("\n\rReturned value = %d",Raw_Temp);
+        //PRINTF("\n\rAlert_State = %d",Alert_State);
     }
     return 0 ;
 }
